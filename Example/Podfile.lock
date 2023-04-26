@@ -1,0 +1,16 @@
+PODS:
+  - UILabelImageText (0.1.0)
+
+DEPENDENCIES:
+  - UILabelImageText (from `../`)
+
+EXTERNAL SOURCES:
+  UILabelImageText:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  UILabelImageText: 8bc77d4c6f2babbc50262ac802e6281c1882b0b8
+
+PODFILE CHECKSUM: 76317e5f470682b10a9bb209463923339643196a
+
+COCOAPODS: 1.12.0
