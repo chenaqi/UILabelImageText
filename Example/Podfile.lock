@@ -1,5 +1,5 @@
 PODS:
-  - UILabelImageText (0.1.1)
+  - UILabelImageText (0.1.2)
 
 DEPENDENCIES:
   - UILabelImageText (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  UILabelImageText: 817ed729749ccada07343da8236731d348f768dd
+  UILabelImageText: 8397324521eb5b2f6fae88ac827c7d868217b7fe
 
 PODFILE CHECKSUM: 15527ab41035e844aebccd8d0ada09e304549359
 
