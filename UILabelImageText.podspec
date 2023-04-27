@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UILabelImageText'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'Use UILabel to achieve image and text mixed layout, supporting click events.'
 
 # This description is used to generate tags and improve search results.

@@ -16,7 +16,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
 
-        agreeL.imageText(normalImage: UIImage(named: "common_icon_unselected"), selectedImage: UIImage(named: "common_icon_selected"), content: " 希望您勾选已阅读并同意《用户协议》和《隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议》", font: UIFont.systemFont(ofSize: 12), largeFont: UIFont.systemFont(ofSize: 16), alignment: .left)
+        agreeL.imageText(normalImage: UIImage(named: "common_icon_unselected"), selectedImage: UIImage(named: "common_icon_selected"), content: " 希望您勾选已阅读并同意《用户协议》和《隐私协议》希望您勾选已阅读并同意《用户协议》和《隐私协议》", font: UIFont.systemFont(ofSize: 12), largeFont: UIFont.systemFont(ofSize: 20), alignment: .left)
         agreeL.setImageCallBack {
             print("点击图标")
             
@@ -26,7 +26,7 @@ class ViewController: UIViewController {
             print("《用户协议》")
         }
         
-        agreeL.setSubstringCallBack(substring: "《隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议隐私协议》") {
+        agreeL.setSubstringCallBack(substring: "《隐私协议》") {
             print("《隐私协议》")
         }
     }

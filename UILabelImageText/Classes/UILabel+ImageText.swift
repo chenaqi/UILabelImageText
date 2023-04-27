@@ -158,11 +158,15 @@ public extension UILabel {
             return
         }
         
+        let ranges = textAttr.string.allRanges(substring: substring) ?? nil
         let attributedString = textAttr.mutableCopy() as! NSMutableAttributedString
-        let range = attributedString.mutableString.range(of: substring)
-        attributedString.addAttributes([NSAttributedString.Key.foregroundColor: color], range: range)
-        attributedText = attributedString
-        callBackMap?[substring] = clicked
+        if ranges != nil {
+            for range in ranges! {
+                attributedString.addAttributes([NSAttributedString.Key.foregroundColor: color], range: range)
+                attributedText = attributedString
+                callBackMap?[substring] = clicked
+            }
+        }
     }
     
     
@@ -216,22 +220,29 @@ public extension UILabel {
         
         let point = gesture.location(in: self)
         for key in dict.keys {
-            guard let (rect1, rect2) = rectFor(string: key) else {
+            guard let textAttr = attributedText else {
                 return
             }
-            let imgString = selected ? selectedImgAttrString : normalImgAttrString
-            
-            if containsPoint(minRect: rect1, maxRect: key == imgString.string ? CGRect(x: 0, y: 0, width: largeFont.pointSize, height: largeFont.pointSize):rect2, point: point) {
-                
-                if key == imgString.string {
-                    selected = !selected
-                }
-                if let callBack = dict[key] {
-                    callBack()
+            let ranges = textAttr.string.allRanges(substring: key) ?? nil
+            if ranges != nil {
+                for range in ranges! {
+                    guard let (rect1, rect2) = rectFor(string: key, stringRange: range) else {
+                        return
+                    }
+                    let imgString = selected ? selectedImgAttrString : normalImgAttrString
+                    
+                    if containsPoint(minRect: rect1, maxRect: key == imgString.string ? CGRect(x: 0, y: 0, width: largeFont.pointSize, height: largeFont.pointSize):rect2, point: point) {
+                        
+                        if key == imgString.string {
+                            selected = !selected
+                        }
+                        if let callBack = dict[key] {
+                            callBack()
+                        }
+                    }
                 }
             }
         }
-        
     }
     
     private func containsPoint(minRect:CGRect, maxRect: CGRect, point: CGPoint) -> Bool {
@@ -247,17 +258,14 @@ public extension UILabel {
 extension UILabel
 {
     // 查找字串的rect
-    func rectFor(string str : String, fromIndex: Int = 0) -> (CGRect, CGRect)?
+    func rectFor(string str : String, stringRange: NSRange) -> (CGRect, CGRect)?
     {
         // Find the range of the string
         guard self.text != nil else { return nil }
-        let subStringToSearch : NSString = (self.text! as NSString).substring(from: fromIndex) as NSString
-        var stringRange = subStringToSearch.range(of: str)
         if (stringRange.location != NSNotFound)
         {
             guard self.attributedText != nil else { return nil }
             // Add the starting point to the sub string
-            stringRange.location += fromIndex
             let storage = NSTextStorage(attributedString: self.attributedText!)
             let layoutManager = NSLayoutManager()
             storage.addLayoutManager(layoutManager)
